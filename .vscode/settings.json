@@ -96,6 +96,9 @@
         "locale": "cpp",
         "queue": "cpp",
         "codecvt": "cpp",
-        "__tree": "cpp"
+        "__tree": "cpp",
+        "regex": "cpp",
+        "future": "cpp",
+        "stack": "cpp"
     },
 }

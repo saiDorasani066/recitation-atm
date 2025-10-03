@@ -71,7 +71,15 @@ TEST_CASE("Example: Simple widthdraw", "[ex-2]") {
   REQUIRE_THROWS_AS(atm.WithdrawCash(12345678, 1234, 400), std::runtime_error);
 }
 
-TEST_CASE("Example: Print Prompt Ledger", "[ex-3]") {
+TEST_CASE("Example: Deposit amount", "[ex-3]") {
+  Atm atm;
+  REQUIRE_THROWS_AS(atm.DepositCash(129476447596, 85757, 300),
+                    std::invalid_argument);
+  REQUIRE_THROWS_AS(atm.DepositCash(37373774, 9494, -200),
+                    std::invalid_argument);
+}
+
+TEST_CASE("Example: Print Prompt Ledger", "[ex-4]") {
   Atm atm;
   atm.RegisterAccount(12345678, 1234, "Sam Sepiol", 300.30);
   auto& transactions = atm.GetTransactions();
@@ -83,4 +91,7 @@ TEST_CASE("Example: Print Prompt Ledger", "[ex-3]") {
       "Deposit - Amount: $32000.00, Updated Balance: $72099.90");
   atm.PrintLedger("./prompt.txt", 12345678, 1234);
   REQUIRE(CompareFiles("./ex-1.txt", "./prompt.txt"));
+
+  REQUIRE_THROWS_AS(atm.PrintLedger("./prompt.txt", 12045678, 1134),
+                    std::invalid_argument);
 }
