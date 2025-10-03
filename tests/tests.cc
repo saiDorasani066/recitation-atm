@@ -73,6 +73,14 @@ TEST_CASE("Example: Simple widthdraw", "[ex-2]") {
 
 TEST_CASE("Example: Deposit amount", "[ex-3]") {
   Atm atm;
+  atm.RegisterAccount(22222222, 2222, "Danial", 1.00);
+  atm.DepositCash(22222222, 2222, 2.00);
+  auto accounts = atm.GetAccounts();
+
+  Account danial_account = accounts[{22222222, 2222}];
+
+  REQUIRE(danial_account.balance == 3.00);
+
   REQUIRE_THROWS_AS(atm.DepositCash(129476447596, 85757, 300),
                     std::invalid_argument);
   REQUIRE_THROWS_AS(atm.DepositCash(37373774, 9494, -200),
