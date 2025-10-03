@@ -40,6 +40,9 @@ TEST_CASE("Example: Create a new account", "[ex-1]") {
   REQUIRE(accounts.contains({12345678, 1234}));
   REQUIRE(accounts.size() == 1);
 
+  REQUIRE_THROWS_AS(atm.RegisterAccount(12345678, 1234, "Sai D", 960.23),
+                    std::invalid_argument);
+
   Account sam_account = accounts[{12345678, 1234}];
   REQUIRE(sam_account.owner_name == "Sam Sepiol");
   REQUIRE(sam_account.balance == 300.30);
